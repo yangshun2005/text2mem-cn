@@ -1,0 +1,182 @@
+# Text2Mem Bench - Test Sample Generation Plan
+
+# ==================== General Configuration ====================
+plan:
+  name: "samples_by_proportion"
+  description: "Proportion-based test sample generation plan"
+  version: "3.0"
+  
+  # Total number of samples to generate
+  total_samples: 2000
+  
+  # Number of samples per LLM call
+  batch_size: 10
+  
+  # Context length configuration
+  min_context_length: 100
+  max_context_length: 350
+  
+  # Checkpoint recovery
+  resume_from_checkpoint: true
+  checkpoint_file: "bench/generate/output/.checkpoint_{plan_name}.json"
+
+# ==================== Scenario Proportion Configuration ====================
+scenario_proportions:
+  incident_postmortem: 0.25    # 25% - Incident Postmortem
+  meeting_notes: 0.25          # 25% - Meeting Notes
+  project_tracking: 0.25       # 25% - Project Tracking
+  knowledge_base: 0.25         # 25% - Knowledge Base
+
+# ==================== Operation Proportion Configuration ====================
+operation_proportions:
+  # Core operations - 40%
+  encode: 0.20        # 20% - Encode / Record
+  retrieve: 0.12      # 12% - Retrieve
+  summarize: 0.08     # 8%  - Summarize
+  
+  # Labeling and Update - 25%
+  label: 0.12         # 12% - Label
+  update: 0.13        # 13% - Update
+
+  # Lifecycle Management - 20%
+  promote: 0.08       # 8%  - Promote
+  demote: 0.07        # 7%  - Demote
+  delete: 0.05        # 5%  - Delete
+  
+  # Advanced Operations - 15%
+  lock: 0.04          # 4%  - Lock
+  merge: 0.04         # 4%  - Merge
+  split: 0.04         # 4%  - Split
+  expire: 0.03        # 3%  - Expire
+
+# ==================== Operation Definitions ====================
+operations:
+  encode:
+    enabled: true
+    description: "Encode / Write memory"
+  
+  retrieve:
+    enabled: true
+    description: "Semantic retrieval"
+  
+  label:
+    enabled: true
+    description: "Add label"
+  
+  update:
+    enabled: true
+    description: "Update field"
+  
+  delete:
+    enabled: true
+    description: "Delete record"
+  
+  promote:
+    enabled: true
+    description: "Promote priority"
+  
+  demote:
+    enabled: true
+    description: "Demote / Archive"
+  
+  lock:
+    enabled: true
+    description: "Lock protection"
+  
+  merge:
+    enabled: true
+    description: "Merge records"
+  
+  split:
+    enabled: true
+    description: "Split record"
+  
+  expire:
+    enabled: true
+    description: "Set expiration"
+  
+  summarize:
+    enabled: true
+    description: "Generate summary"
+
+# ==================== Scenario Definitions ====================
+scenarios:
+  incident_postmortem:
+    name: "Incident Postmortem"
+    name_en: "Incident Postmortem"
+    enabled: true
+  
+  meeting_notes:
+    name: "Meeting Notes"
+    name_en: "Meeting Notes"
+    enabled: true
+  
+  project_tracking:
+    name: "Project Tracking"
+    name_en: "Project Tracking"
+    enabled: true
+  
+  knowledge_base:
+    name: "Knowledge Base"
+    name_en: "Knowledge Base"
+    enabled: true
+
+# ==================== Sample Characteristics Distribution ====================
+characteristics:
+  # Instruction style
+  instruction_style:
+    direct: 85%         # Direct instruction
+    indirect: 15%       # Indirect instruction
+  
+  # Structural complexity
+  structure:
+    single: 90%         # Single operation
+    workflow: 10%       # Multi-operation workflow
+  
+  # Language distribution
+  lang:
+    zh: 0%              # Chinese
+    en: 100%            # English
+
+# ==================== LLM Configuration ====================
+llm:
+  provider: "openai"
+  model: "gpt-4o"
+  api_key_env: "OPENAI_API_KEY"
+  base_url: ""
+  
+  temperature: 0.7
+  max_tokens: 4000
+  timeout: 120
+
+# ==================== Three-Stage Pipeline Configuration ====================
+stages:
+  stage1_nl_generation:
+    enabled: true
+    temperature: 0.7
+    max_tokens: 4000
+    batch_size: 8
+  
+  stage2_ir_generation:
+    enabled: true
+    temperature: 0.5
+    max_tokens: 4000
+    batch_size: 1
+  
+  stage3_expected_generation:
+    enabled: true
+    temperature: 0.5
+    max_tokens: 4000
+    batch_size: 1
+
+# ==================== Output Configuration ====================
+output:
+  base_dir: "bench/data/raw"   # Output directory: data/raw/
+  format: "jsonl"
+  keep_intermediate: true
+
+# ==================== Logging Configuration ====================
+logging:
+  level: "INFO"
+  file: "bench/output/logs/generation.log"
+  console: true

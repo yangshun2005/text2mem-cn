@@ -1,0 +1,14 @@
+{
+  "_comment": "新同事本周入职，请把所有带 project 和 关键决策 标签的记忆提升权重，确保检索时优先展示。",
+  "stage": "STO",
+  "op": "Promote",
+  "target": {
+    "filter": {
+      "has_tags": ["project", "关键决策"],
+      "limit": 20
+    }
+  },
+  "args": {
+    "weight": 1.0
+  }
+}

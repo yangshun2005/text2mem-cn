@@ -1,0 +1,75 @@
+# Python bytecode
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+
+# Distribution / packaging
+dist/
+build/
+*.egg-info/
+
+# Virtual environments
+.venv/
+venv/
+ENV/
+
+# Testing
+.coverage
+.pytest_cache/
+htmlcov/
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Environment variables
+.env
+!.env.example
+
+# SQLite database files
+*.sqlite
+*.sqlite3
+*.db
+
+# Logs
+*.log
+logs/
+
+# Jupyter notebooks
+.ipynb_checkpoints/
+*.ipynb
+
+# macOS
+.DS_Store
+
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# Bench artifacts & caches
+cache/
+outputs/
+# bench/data/benchmark/*.jsonl
+# bench/data/benchmark/*.json
+!bench/data/benchmark/.gitkeep
+bench/data/results/
+!bench/data/results/.gitkeep
+bench/data/raw/
+!bench/data/raw/.gitkeep
+bench/generate/output/
+bench/generate/logs/
+
+# Archived documentation
+.archived_docs/
+
+# Temporary scripts
+simplify_bench.sh
+
+# Build artifacts
+text2mem.egg-info/
+dist/
+build/

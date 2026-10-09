@@ -1,0 +1,16 @@
+{
+  "_comment": "灵感墙里很多打了临时、草稿标签的脑暴内容，请设置 90 天后自动过期，并在到期时软删除。",
+  "stage": "STO",
+  "op": "Expire",
+  "target": {
+    "filter": {
+      "has_tags": ["临时", "草稿"],
+      "type": "note",
+      "limit": 100
+    }
+  },
+  "args": {
+    "ttl": "P90D",
+    "on_expire": "soft_delete"
+  }
+}
